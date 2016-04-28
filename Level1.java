@@ -10,21 +10,25 @@ import java.util.Set;
 
 public class Level1 extends Applet implements KeyListener, MouseListener {
 		Set<Character> keys = new HashSet<Character>();
-		boolean paused = true;
-		int x,y, velocity;
+		boolean paused = false;
+		Sprite character;
+		Toolkit toolkit;
 		public void init(){
 			setBackground(Color.white);
-			x = 400;
-			y = 250;
-			velocity = 10;
+			TextField program = new TextField();
+
 			//Allows program to use mouse and keyboard events
 			addKeyListener(this);
 			addMouseListener(this);
+			toolkit = Toolkit.getDefaultToolkit();
+			
+			character = new Sprite(400,250, 1, toolkit.getImage("PogChamp.png"));
 		}
 		
 		public void paint(Graphics page){
-			page.setColor(Color.black);
-			page.drawRect(x,y,10,10);
+			
+			character.move(keys);
+			character.draw(page);
 			repaint();
 		}
 		
@@ -34,32 +38,10 @@ public class Level1 extends Applet implements KeyListener, MouseListener {
 			
 			//Adds pressed key to set
 			keys.add(event.getKeyChar());
-			
-			
-			move();
-			//Temporary variable for updating buidings y coordinates
-			int z;
-			
-			
+		
 		}
 		
-		public void move(){
-			if(keys.contains('w')){
-				y -= velocity;
-			}
-			
-			if(keys.contains('a')){
-				x -= velocity;
-			}
-			
-			if(keys.contains('s')){
-				y += velocity;
-			}
-			
-			if(keys.contains('d')){
-				x += velocity;
-			}
-		}
+
 		//Runs when a key is released
 		public synchronized void keyReleased(KeyEvent event){
 		  //Method to remove key from Set if released
