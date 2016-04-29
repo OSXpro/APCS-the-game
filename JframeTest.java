@@ -3,16 +3,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashSet;
+import java.util.Set;
 
-
-public class JframeTest extends JPanel implements KeyListener{]{
-	Sprite character;
+public class JframeTest extends JPanel implements KeyListener{
+	public Sprite character;
 	Set<Character> keys = new HashSet<Character>();
 	
 	public JframeTest(){
 		super();
+		addKeyListener(this);
 		try {
-			character = new Sprite(400,250, 1, ImageIO.read(new File("H:/APCS/Game/src/Sprite.jpg")));
+			character = new Sprite(100,250, 1, ImageIO.read(new File("/home/tanveer/workspace/APCS the game/src/sprite.jpg")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -24,17 +30,18 @@ public class JframeTest extends JPanel implements KeyListener{]{
 	}
 	
 	public static void main(String[] args){
-	    JPanel panel = new JPanel();
+	    JframeTest panel = new JframeTest();
 	    JFrame frame = new JFrame("APCS the game");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.add(new JframeTest());
+	    frame.add(panel);
+	    frame.addKeyListener(panel);
 	    frame.setSize(800, 500);
 	    frame.pack();
 	    frame.setBackground(Color.white);
 	    frame.setVisible(true);
 	}
 	
-	protected void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 	    setBackground(Color.white);
 	    int width = getWidth();
 	    int height = getHeight();
@@ -46,6 +53,7 @@ public class JframeTest extends JPanel implements KeyListener{]{
 	  }
 	  
 	public synchronized void keyPressed(KeyEvent event) {
+		System.out.println("Hi");
 		//Adds pressed key to set
 		keys.add(event.getKeyChar());
 	}
