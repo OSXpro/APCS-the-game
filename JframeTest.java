@@ -18,7 +18,7 @@ public class JframeTest extends JPanel implements KeyListener{
 		super();
 		addKeyListener(this);
 		try {
-			character = new Sprite(100,250, 1, ImageIO.read(new File("/home/tanveer/workspace/APCS the game/src/sprite.jpg")));
+			character = new Sprite(100,250, 1, ImageIO.read(new File("C:/Users/tanve/Desktop/Java/APCS The Game/src/PogChamp.png")), ImageIO.read(new File("C:/Users/tanve/Desktop/Java/APCS The Game/src/PogChamp2.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,6 +42,7 @@ public class JframeTest extends JPanel implements KeyListener{
 	}
 	
 	public void paintComponent(Graphics g) {
+		g.clearRect(0, 0, 800, 500);
 	    setBackground(Color.white);
 	    int width = getWidth();
 	    int height = getHeight();
@@ -53,7 +54,7 @@ public class JframeTest extends JPanel implements KeyListener{
 	  }
 	  
 	public synchronized void keyPressed(KeyEvent event) {
-		System.out.println("Hi");
+		//System.out.println("Hi");
 		//Adds pressed key to set
 		keys.add(event.getKeyChar());
 	}

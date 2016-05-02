@@ -1,10 +1,10 @@
-
 import java.awt.*;
 import java.util.Set;
-import java.applet.*;
+
 
 public class Sprite {
-	int x,y,velocity, frames;
+	int x,y,velocity;
+	double frames;
 	Image image, walk1, walk2;
 	
 	
@@ -28,33 +28,39 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics page){
-		page.clearRect(x,y, image.getWidth(null), image.getHeight(null));
+		//page.clearRect(x,y, image.getWidth(null), image.getHeight(null));
 		page.drawImage(image, x, y, null);
 	}
 
 	public void move(Set keys){
-		frames ++;
-		if(frames % 10 == 0){
-			if(image.equals(walk1))
-				image = walk2;
-			else
-				image = walk1;
+		
+		if(frames > 80)
+			image = walk2;
+		if(frames > 160){
+			image = walk1;
 			frames = 0;
 		}
+		
 		if(keys.contains('w')){
 			y -= velocity;
+			frames ++;
 		}
 		
 		if(keys.contains('a')){
 			x -= velocity;
+			frames ++;
 		}
 		
 		if(keys.contains('s')){
 			y += velocity;
+			frames ++;
 		}
 		
 		if(keys.contains('d')){
 			x += velocity;
+			frames ++;
 		}
+		System.out.println(frames);
 	}
 }
+
