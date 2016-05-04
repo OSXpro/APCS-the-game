@@ -32,7 +32,7 @@ public class Sprite {
 		page.drawImage(image, x, y, null);
 	}
 
-	public void move(Set keys){
+	public void move(Set keys, int width, int height){
 		
 		if(frames > 80)
 			image = walk2;
@@ -42,25 +42,28 @@ public class Sprite {
 		}
 		
 		if(keys.contains('w')){
-			y -= velocity;
+			if(y > 0)
+				y -= velocity;
 			frames ++;
 		}
 		
 		if(keys.contains('a')){
-			x -= velocity;
+			if(x > 0)
+				x -= velocity;
 			frames ++;
 		}
 		
 		if(keys.contains('s')){
-			y += velocity;
+			if(y + image.getHeight(null) < height)
+				y += velocity;
 			frames ++;
 		}
 		
 		if(keys.contains('d')){
-			x += velocity;
+			if(x + image.getWidth(null) < width)
+				x += velocity;
 			frames ++;
 		}
-		System.out.println(frames);
 	}
 }
 
