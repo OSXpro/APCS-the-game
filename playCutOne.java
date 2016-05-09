@@ -11,7 +11,7 @@ public class playCutOne {
 	public static void main(String[] args){
 
 	  
-	    Icon icon = new ImageIcon("H:/Final pictures/Cutscene11.gif");
+	    Icon icon = new ImageIcon("H:/Final pictures/Cutscene1.gif");
 	    JLabel label = new JLabel(icon);
 
 	    JFrame f = new JFrame("Animation");
