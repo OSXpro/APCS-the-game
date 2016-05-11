@@ -4,15 +4,15 @@ import java.util.Set;
 
 
 public class Sprite {
-	int x,y,velocity, index;
-	double frames;
+	double x,y;
+	double frames, velocity, index;
 	Image image, walk1, walk2, idle;
 	ArrayList<Image> sprite;
 	
-	public Sprite(int x, int y, int velocity, Image image){
+	public Sprite(int x, int y, double d, Image image){
 		this.x = x;
 		this.y = y;
-		this.velocity = velocity;
+		this.velocity = d;
 		this.image = image;
 		walk1 = image;
 		walk2 = image;
@@ -24,10 +24,10 @@ public class Sprite {
 		}
 		index = 0;
 	}
-	public Sprite(int x, int y, int velocity, Image walk1, Image walk2){
+	public Sprite(int x, int y, double d, Image walk1, Image walk2){
 		this.x = x;
 		this.y = y;
-		this.velocity = velocity;
+		this.velocity = d;
 		image = walk1;
 		this.walk1 = walk1;
 		this.walk2 = walk2;
@@ -52,14 +52,14 @@ public class Sprite {
 	}
 	public void draw(Graphics page){
 		//page.clearRect(x,y, image.getWidth(null), image.getHeight(null));
-		page.drawImage(image, x, y, null);
+		page.drawImage(image, (int) x, (int) y, null);
 	}
 
 	public void move(Set<Character> keys, int width, int height){
 		boolean still = true;
-		idle = sprite.get(index);
-		walk1 = sprite.get(index + 1);
-		walk2 = sprite.get(index +2);
+		idle = sprite.get((int) (index));
+		walk1 = sprite.get((int) (index + velocity));
+		walk2 = sprite.get((int) (index + velocity));
 		if(keys.contains('w')){
 			if(y > 0)
 				y -= velocity;
