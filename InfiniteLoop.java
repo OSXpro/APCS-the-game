@@ -16,11 +16,11 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 	static JTextField t;
 	int frames;
 	
-	public InfiniteLoop(){
+	public InfinateLoop(){
 		super();
 		addKeyListener(this);
 		try {
-			character = new Sprite(400,250, 1, ImageIO.read(new File("C:/Users/tanve/Desktop/Java/APCS The Game/src/Heart.jpg")));
+			character = new Sprite(400,250, .25, ImageIO.read(new File("src/Sprites/Idle.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 	}
 	
 	public static void main(String[] args){
-	    InfiniteLoop panel = new InfiniteLoop();
+	    InfinateLoop panel = new InfinateLoop();
 	    JFrame frame = new JFrame("APCS the game");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.add(panel);
@@ -48,7 +48,7 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 	public void paintComponent(Graphics g) {
 		
 		frames ++;
-		if(frames > 150){
+		if(frames > 500){
 			character.move(400, 250);
 			frames = 0;
 		}
