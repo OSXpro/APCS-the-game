@@ -7,18 +7,21 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class JframeTest extends JPanel implements KeyListener{
 	public Sprite character;
 	Set<Character> keys = new HashSet<Character>();
+	int frames = 0;
+	private ArrayList<FILEIO> files = new ArrayList();
 	
 	public JframeTest(){
 		super();
 		addKeyListener(this);
 		try {
-			character = new Sprite(100,250, 1, ImageIO.read(new File("C:/Users/tanve/Desktop/Java/APCS The Game/src/PogChamp.png")), ImageIO.read(new File("C:/Users/tanve/Desktop/Java/APCS The Game/src/PogChamp2.png")));
+			character = new Sprite(100,250, 1, ImageIO.read(new File("H:/Backup/Workspace APCS/Final Project/src/hellmo.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,14 +45,47 @@ public class JframeTest extends JPanel implements KeyListener{
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.clearRect(0, 0, 800, 500);
+		frames++;
+		g.clearRect(0, 0, getWidth(), getHeight());
 	    setBackground(Color.white);
 	    int width = getWidth();
 	    int height = getHeight();
 	    g.setColor(Color.black);
 	    g.drawOval(0, 0, width, height);
+	    FILEIO file;
+	    int good = 0;
+	    int bad = 0;
+	    
+	    
 	    character.draw(g);
-	    character.move(keys);
+	    character.move(keys, getWidth(), getHeight());
+	    if(frames == 500){
+	    	try {
+				file = new FILEIO(Math.random());
+				files.add(file);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	frames = 0;
+	    }
+	    
+	    for(FILEIO a: files){
+			a.move(g);
+			a.draw(g);
+			if(a.collide(character) && a.isRed())
+				bad++;
+			else if(a.collide(character) && a.isRed() == false)
+				good ++;
+		}
+	    
+		g.drawString("LIVES LEFT: " + (3-bad), 500,100);
+		g.drawString("NEED TO GET:" + (10-good), 800, 100);
+    	if(bad == 3)
+    		g.drawString("YOU LOSE", 100, 100);
+    	else if(good == 10)
+    		g.drawString("YOU WIN", 100, 100);
 	    repaint();
 	  }
 	  

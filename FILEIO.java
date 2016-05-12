@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
@@ -6,33 +8,49 @@ import javax.imageio.ImageIO;
 
 
 public class FILEIO {
-	int imgspeed = 0;
+	int imgspeed = 0, index;
 	Color color = null;
-	String[] arr1;
+	Image file;
+	public String[] arr1;
+	double x;
+	double y;
+	double velocity;
 
-	public int speed()
+
+	public boolean isRed()
 	{
-		int speed = (int) (Math.random() * 100);
-		return speed;
+		boolean c = false;
+		if(this.index <3)
+			c = true;
+		return c;
 	}
-	public FILEIO() throws IOException
+	public FILEIO(double speed) throws IOException
 	{
-		String[] arr = ("src//file1.png","src//file2.png", "src//file3.png", 
-				"src//file4.png", "src//file5.png", "src//file6.png");
-		arr1 = arr;
-		
-		Sprite file;
-		int path = (int)(Math.random() * 6);
-		file = new Sprite(-200 , (int)(Math.random() * 500), speed(), ImageIO.read(new File(arr[path])));
-			
-		
-		
-		
-		
+		x = 0;
+		y = (int)(Math.random() * 500);
+		velocity = speed;
+		String[] arr ={"src//file1.png","src//file2.png", "src//file3.png", 
+				"src//file4.png", "src//file5.png", "src//file6.png"};
+		index = (int) (Math.random() * 6);
+		file = ImageIO.read(new File(arr[index]));
+	
 	}
-	public static void main(String[] args) throws IOException
+	
+	public void draw(Graphics page)
 	{
-		FILEIO newfile = new FILEIO();
+		page.drawImage(file,(int)x, (int)y, null);
+		
 	}
+	public void move(Graphics g)
+	{
+		x += velocity;
+		
+	}
+	public boolean collide(Sprite character){
+		return ((Math.abs(character.x - x) < 60) && ((Math.abs(character.y - y) < 30)));
+	}
+	
+	
+
 	
 }
