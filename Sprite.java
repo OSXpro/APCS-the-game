@@ -107,4 +107,7 @@ public class Sprite {
 		this.x = x;
 		this.y = y;
 	}
+	public Image getImage(){
+		return sprite.get(0);
+	}
 }
