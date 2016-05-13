@@ -74,6 +74,8 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 	    //g.drawOval(0, 0, width, height);
 	    character.draw(g);
 	    character.move(keys, width, height);
+	    //Closese windows
+	    //frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 	    repaint();
 	  }
 
