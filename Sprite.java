@@ -40,7 +40,7 @@ public class Sprite {
 		index = 0;
 	}
 	
-	public Sprite(int x, int y, int velocity, ArrayList<Image> sprite){
+	public Sprite(int x, int y, double velocity, ArrayList<Image> sprite){
 		this.x = x;
 		this.y = y;
 		this.velocity = velocity;
@@ -58,8 +58,8 @@ public class Sprite {
 	public void move(Set<Character> keys, int width, int height){
 		boolean still = true;
 		idle = sprite.get((int) (index));
-		walk1 = sprite.get((int) (index + velocity));
-		walk2 = sprite.get((int) (index + velocity));
+		walk1 = sprite.get((int) (index + 1));
+		walk2 = sprite.get((int) (index + 2));
 		if(keys.contains('w')){
 			if(y > 0)
 				y -= velocity;
