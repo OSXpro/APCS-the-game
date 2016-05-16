@@ -64,7 +64,7 @@ public class JframeTest extends JPanel implements KeyListener{
 		g.clearRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
 		g.drawRect(0, 0, getWidth(), getHeight());
-	    g.setColor(Color.white);
+	    g.setColor(Color.black);
 	    FILEIO file;
 	    
 	    character.draw(g);
@@ -88,6 +88,7 @@ public class JframeTest extends JPanel implements KeyListener{
 			{
 				bad++;
 				removed.add(a);
+				good = 0;
 			}
 			else if(a.collide(character) && a.isRed() == false)
 			{
