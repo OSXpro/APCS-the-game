@@ -31,7 +31,7 @@ public class FILEIO {
 		velocity = speed;
 		String[] arr ={"src//file1.png","src//file2.png", "src//file3.png", 
 				"src//file4.png", "src//file5.png", "src//file6.png"};
-		index = (int) (Math.random() * 6);
+		index = (int) ((Math.random() * 10) % 6);
 		file = ImageIO.read(new File(arr[index]));
 	
 	}

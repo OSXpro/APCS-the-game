@@ -5,20 +5,26 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InfiniteLoop extends JPanel implements KeyListener{
+public class file extends JPanel implements KeyListener{
 	public Sprite character;
 	Set<Character> keys = new HashSet<Character>();
-	ArrayList<Image> sprite = new ArrayList<Image>();
-	int frames;
-	public InfiniteLoop(){
+	int frames = 0;
+	private ArrayList<FILEIO> files = new ArrayList<FILEIO>(); ArrayList<Image> sprite = new ArrayList<Image>(); ArrayList<FILEIO> removed = new ArrayList<FILEIO>();
+	int good = 0; int bad = 0;
+	static JFrame frame;
+	
+	public file(){
 		super();
-		frames = 0;
 		addKeyListener(this);
 		try {
+
 			sprite.add(ImageIO.read(new File("src/Sprite/back.png")));
 			sprite.add(ImageIO.read(new File("src/Sprite/back walk 1.png")));
 			sprite.add(ImageIO.read(new File("src/Sprite/back walk 2.png")));
@@ -35,67 +41,109 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
-
+	
 	public Dimension getPreferredSize() {
 	    return new Dimension(800, 500);
 	}
-
+	
 	public static void main(String[] args){
-	    InfiniteLoop panel = new InfiniteLoop();
-	    JFrame frame = new JFrame("APCS the game");
+	    file panel = new file();
+	    panel.setOpaque(false);
+	    frame = new JFrame("APCS the game");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.add(panel);
 	    frame.addKeyListener(panel);
 	    frame.setSize(800, 500);
 	    frame.pack();
-	    frame.setBackground(Color.white);
+	    frame.setBackground(Color.black);
+	   
 	    frame.setVisible(true);
 	}
-
+	
 	public void paintComponent(Graphics g) {
-		
-		frames ++;
-		if(frames > 500){
-			character.move(400, 250);
-			frames = 0;
-		}
+		frames++;
+		g.clearRect(0, 0, getWidth(), getHeight());
+	    g.setColor(Color.white);
+	    FILEIO file;
 	    
-	    
-	    int width = getWidth();
-	    int height = getHeight();
-	    g.clearRect(0, 0, width, height);
-	    g.setColor(Color.black);
-	    
-	    g.setFont(new Font("Comic Sans MS", Font.PLAIN, 32)); 
-	    g.drawString("while(1 == 1){", 150, 100);
-		g.drawString("}", 600, 400);
-	    //g.drawOval(0, 0, width, height);
 	    character.draw(g);
-	    character.move(keys, width, height);
-	    //Closese windows
-	    //frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-	    repaint();
+	    character.move(keys, getWidth(), getHeight());
+	    if(frames == 500){
+	    	try {
+				file = new FILEIO(Math.random());
+				files.add(file);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	frames = 0;
+	    }
+	    
+	    for(FILEIO a: files){
+			a.move(g);
+			a.draw(g);
+			if(a.collide(character) && a.isRed())
+			{
+				bad++;
+				removed.add(a);
+				good = 0;
+			}
+			else if(a.collide(character) && a.isRed() == false)
+			{
+				good ++;
+				removed.add(a);
+			}
+		}
+	    for(FILEIO a: removed){
+	    	files.remove(a);
+	    	
+	    }
+	    removed = new ArrayList<FILEIO>();
+		g.drawString("LIVES LEFT: " + (3-bad), 0,10);
+		g.drawString("NEED TO GET:" + (10-good), 700, 10);
+		
+		if(bad != 3 && good!= 10)
+			repaint();
+		else{
+			g.setFont(new Font("omics Sans MS", Font.PLAIN, 100)); 
+			if(bad == 3)
+	    	{
+	    		
+	    		g.drawString("YOU LOSE", 100, 200);
+	    	}
+	    	else if(good == 10)
+	    	{
+	    		g.setFont(new Font("Comics Sans MS", Font.PLAIN, 100)); 
+	    		g.drawString("YOU WIN", 100, 100); 
+	    	}
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+		}
 	  }
-
+	  
 	public synchronized void keyPressed(KeyEvent event) {
 		//System.out.println("Hi");
 		//Adds pressed key to set
 		keys.add(event.getKeyChar());
-
 	}
-
+		
 	//Runs when a key is released
 	public synchronized void keyReleased(KeyEvent event){
 		//Method to remove key from Set if released
-		System.out.println(event.getKeyChar());
 		if(keys.contains(event.getKeyChar()))
 			keys.remove(event.getKeyChar());
 	}
-
+		
 	//Empty Implemented method that has to be here for use of listener
 	public void keyTyped(KeyEvent event) {
-
+			
 	}
 }

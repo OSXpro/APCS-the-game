@@ -32,9 +32,9 @@ public class Death extends JPanel {
 		    
 		    
 		    message.add("Looks like you left your computer unlocked");
-			message.add("Are you sure you’re not writing java script?");
+			message.add("Are you sure youï¿½re not writing java script?");
 			message.add("You should drop the class");
-			message.add("You didn’t need that college credit anyway");
+			message.add("You didnï¿½t need that college credit anyway");
 			message.add("Should have used eclipse");
 			mess = rand.nextInt(message.size()-1);
 		}
@@ -48,7 +48,6 @@ public class Death extends JPanel {
 	    int width = getWidth();
 	    int height = getHeight();
 	    
-	    g.setFont();
 	   
 		
 		

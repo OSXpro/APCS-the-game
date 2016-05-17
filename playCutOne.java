@@ -11,7 +11,7 @@ public class playCutOne {
 	public static void main(String[] args){
 
 	  
-	    Icon icon = new ImageIcon("H:/Final pictures/Cutscene1.gif");
+	    Icon icon = new ImageIcon("/src/Cutscene1.gif");
 	    JLabel label = new JLabel(icon);
 
 	    JFrame f = new JFrame("Animation");
@@ -23,6 +23,7 @@ public class playCutOne {
 	    
 	    try {
 			Thread.sleep(28026);
+			f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
