@@ -54,7 +54,6 @@ public class file extends JPanel implements KeyListener{
 		
 	    file panel = new file();
 	    panel.setOpaque(false);
-	    panel.setBackground(Color.black);
 	    frame = new JFrame("APCS the game");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.add(panel);
@@ -62,10 +61,10 @@ public class file extends JPanel implements KeyListener{
 	    frame.setSize(800, 500);
 	    frame.pack();
 	    frame.setBackground(Color.black);
-	   
 	    frame.setVisible(true);
+	    
 	    player = new Music();
-		player.play("src/music/Battle Against a True Hero.wav");
+	    player.play("src/music/Battle Against a True Hero.wav");
 	}
 	
 	public void paintComponent(Graphics g) {
