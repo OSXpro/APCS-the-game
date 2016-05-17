@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -11,7 +12,8 @@ public class FILEIO {
 	int imgspeed = 0, index;
 	Color color = null;
 	Image file;
-	public String[] arr1;
+	public String[] arr  = {"src//file1.png","src//file2.png", "src//file3.png", 
+			"src//file4.png", "src//file5.png", "src//file6.png"};;
 	double x;
 	double y;
 	double velocity;
@@ -29,8 +31,6 @@ public class FILEIO {
 		x = 0;
 		y = (int)(Math.random() * 500);
 		velocity = speed;
-		String[] arr ={"src//file1.png","src//file2.png", "src//file3.png", 
-				"src//file4.png", "src//file5.png", "src//file6.png"};
 		index = (int) ((Math.random() * 10) % 6);
 		file = ImageIO.read(new File(arr[index]));
 	
@@ -47,7 +47,7 @@ public class FILEIO {
 		
 	}
 	public boolean collide(Sprite character){
-		return ((Math.abs(character.x - x) < 60) && ((Math.abs(character.y - y) < 30)));
+		return ((Math.abs(character.x - x) < file.getWidth(null)) && ((Math.abs(character.y - y) < file.getHeight(null))));
 	}
 	
 	

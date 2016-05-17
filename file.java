@@ -17,11 +17,13 @@ public class file extends JPanel implements KeyListener{
 	Set<Character> keys = new HashSet<Character>();
 	int frames = 0;
 	private ArrayList<FILEIO> files = new ArrayList<FILEIO>(); ArrayList<Image> sprite = new ArrayList<Image>(); ArrayList<FILEIO> removed = new ArrayList<FILEIO>();
-	int good = 0; int bad = 0;
+	int good = 0; static int bad = 0;
 	static JFrame frame;
-	
+	static Music player;
 	public file(){
 		super();
+		good = 0;
+		bad = 0;
 		addKeyListener(this);
 		try {
 
@@ -49,8 +51,10 @@ public class file extends JPanel implements KeyListener{
 	}
 	
 	public static void main(String[] args){
+		
 	    file panel = new file();
 	    panel.setOpaque(false);
+	    panel.setBackground(Color.black);
 	    frame = new JFrame("APCS the game");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.add(panel);
@@ -60,12 +64,14 @@ public class file extends JPanel implements KeyListener{
 	    frame.setBackground(Color.black);
 	   
 	    frame.setVisible(true);
+	    player = new Music();
+		player.play("src/music/Battle Against a True Hero.wav");
 	}
 	
 	public void paintComponent(Graphics g) {
 		frames++;
 		g.clearRect(0, 0, getWidth(), getHeight());
-	    g.setColor(Color.white);
+	    //g.setColor(Color.white);
 	    FILEIO file;
 	    
 	    character.draw(g);
@@ -108,24 +114,11 @@ public class file extends JPanel implements KeyListener{
 		if(bad != 3 && good!= 10)
 			repaint();
 		else{
-			g.setFont(new Font("omics Sans MS", Font.PLAIN, 100)); 
-			if(bad == 3)
-	    	{
-	    		
-	    		g.drawString("YOU LOSE", 100, 200);
-	    	}
-	    	else if(good == 10)
-	    	{
-	    		g.setFont(new Font("Comics Sans MS", Font.PLAIN, 100)); 
-	    		g.drawString("YOU WIN", 100, 100); 
-	    	}
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			player.stop();
+			g.setFont(new Font("Comics Sans MS", Font.PLAIN, 100)); 
+			
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			
 		}
 	  }
 	  
