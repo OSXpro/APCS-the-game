@@ -71,7 +71,7 @@ public class JframeTest extends JPanel implements KeyListener{
 	    character.move(keys, getWidth(), getHeight());
 	    if(frames == 500){
 	    	try {
-				file = new FILEIO(Math.random());
+				file = new FILEIO(Math.random()*2);
 				files.add(file);
 				
 			} catch (IOException e) {
@@ -107,7 +107,7 @@ public class JframeTest extends JPanel implements KeyListener{
 	    	else if(good == 10)
 	    	{
 	    		g.setFont(new Font("TimesRoman", Font.PLAIN, 100)); 
-	    		g.drawString("YOU WIN", 100, 100);
+	    		g.drawString("YOU WIN", 200, 200);
 	    		g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
 	    	}
 	    }
