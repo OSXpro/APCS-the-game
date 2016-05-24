@@ -42,6 +42,29 @@ public class Death extends JPanel {
 			player = new Music();
 			player.play("src/music/Determination.wav");
 		}
+	public static void play(JFrame frame){
+		Death panel = new Death();
+	    //frame = new JFrame("APCS the game");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.add(panel);
+	    frame.setSize(800, 500);
+	    frame.setBackground(Color.black);
+	    frame.pack();
+	    frame.setVisible(true);
+	    
+	    
+	    
+	    message.add("Looks like you left your computer unlocked");
+		message.add("You should drop the class");
+		message.add("You didn't need that college credit anyway");
+		message.add("Should have used eclipse");
+		message.add("Stop using iIntelliJ");
+		
+		mess = rand.nextInt(message.size()-1);
+		player = new Music();
+		player.play("src/music/Determination.wav");
+		panel.paintComponent(panel.getGraphics());
+	}
 	public Dimension getPreferredSize() {
 	    return new Dimension(800, 500);
 	    

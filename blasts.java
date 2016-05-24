@@ -67,6 +67,8 @@ public class blasts extends JPanel implements KeyListener{
 
 	    int width = getWidth();
 	    int height = getHeight();
+	    Blast blast = new Blast(0, 300, true, Color.black);
+	    blast.draw(g, width, height);
 	    g.clearRect(0, 0, width, height);
 	    g.setColor(Color.black);
 	    

@@ -47,7 +47,7 @@ public class InfiniteLoop extends JPanel implements KeyListener{
 		}
 
 	}
-
+	
 	public Dimension getPreferredSize() {
 	    return new Dimension(800, 500);
 	}
