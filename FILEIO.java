@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -12,44 +11,44 @@ public class FILEIO {
 	int imgspeed = 0, index;
 	Color color = null;
 	Image file;
-	public String[] arr  = {"src//file1.png","src//file2.png", "src//file3.png", 
-			"src//file4.png", "src//file5.png", "src//file6.png"};;
+	public String[] arr1;
 	double x;
 	double y;
 	double velocity;
 
 
-	public boolean isRed()
+	public boolean isRed()//returns the color of the filepath
 	{
 		boolean c = false;
-		if(this.index <3)
+		if(this.index <3)//color based on index in the array
 			c = true;
 		return c;
 	}
 	public FILEIO(double speed) throws IOException
 	{
 		x = 0;
-		y = (int)(Math.random() * 500);
+		y = (int)(Math.random() * 500);//randomly generates a location
 		velocity = speed;
-		index = (int) ((Math.random() * 10) % 6);
-		file = ImageIO.read(new File(arr[index]));
+		String[] arr ={"src//file1.png","src//file2.png", "src//file3.png", 
+				"src//file4.png", "src//file5.png", "src//file6.png"};//array of files
+		index = (int) (Math.random() * 5);
+		file = ImageIO.read(new File(arr[index]));//randomly makes the object
 	
 	}
 	
 	public void draw(Graphics page)
 	{
-		page.drawImage(file,(int)x, (int)y, null);
+		page.drawImage(file,(int)x, (int)y, null);//draws the image
 		
 	}
 	public void move(Graphics g)
 	{
-		x += velocity;
+		x += velocity;//moves the path across the screen
 		
 	}
 	public boolean collide(Sprite character){
-		return ((Math.abs(character.x - x) < file.getWidth(null)) && ((Math.abs(character.y - y) < file.getHeight(null))));
+		return ((Math.abs(character.x - x) < 60) && ((Math.abs(character.y - y) < 30)));//tests to see if the player and the object are colliding
 	}
-	
 	
 	
 
