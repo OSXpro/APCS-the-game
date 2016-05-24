@@ -47,7 +47,7 @@ public class FILEIO {
 		
 	}
 	public boolean collide(Sprite character){
-		return ((Math.abs(character.x - x) < 60) && ((Math.abs(character.y - y) < 30)));//tests to see if the player and the object are colliding
+		return ((Math.abs(x - character.x) < 100) && ((Math.abs(y - character.y) < 30)));//tests to see if the player and the object are colliding
 	}
 	
 	
